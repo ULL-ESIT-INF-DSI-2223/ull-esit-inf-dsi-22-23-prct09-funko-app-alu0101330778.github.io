@@ -25,5 +25,3 @@ jobs:
       run: npm i
     - name: Running Tests
       run : npm run nyc
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
