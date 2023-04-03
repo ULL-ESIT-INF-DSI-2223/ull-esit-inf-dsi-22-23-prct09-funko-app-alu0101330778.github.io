@@ -1,22 +1,24 @@
-# [PRÁCTICA 7. DESTRAVATE](https://github.com/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct07-destravate-datamodel-grupof.git). 
+# [PRÁCTICA 7. DESTRAVATE](https://github.com/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct07-destravate-datamodel-grupof.git).
 
 [![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct06-generics-solid-alu0101036694/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct06-generics-solid-alu0101036694?branch=main)
 
 ## Carla Oval Torres, Jairo Alonso Abreu, Gabi Vacaru
 
 ## Índice <a name="índice"></a>
+
 1. [Introducción](#introducción)
 2. [Descripción de los requisitos del sistema](#requisitos)
 3. [Funcionamiento](#funcionamiento)
-    1. [Tipos de datos (rutas, retos, usuarios y grupos)](#tipos)
-    2. [Colecciones de datos](#colecciones)
-    3. [Schemas](#schemas)
-    4. [Base de datos](#database)
-    5. [Programa principal](#principal)
-3. [Conclusiones](#conclusiones)
-4. [Referencias](#referencias)
+   1. [Tipos de datos (rutas, retos, usuarios y grupos)](#tipos)
+   2. [Colecciones de datos](#colecciones)
+   3. [Schemas](#schemas)
+   4. [Base de datos](#database)
+   5. [Programa principal](#principal)
+4. [Conclusiones](#conclusiones)
+5. [Referencias](#referencias)
 
 ## Introducción <a name="introducción"></a>
+
 > [Volver al índice](#índice)
 
 En esta práctica, la primera grupal de la asignatura, tendrá que llevar a cabo un diseño orientado a objetos del modelo de datos de un sistema de información que permita almacenar registros de actividades deportivas.
@@ -28,11 +30,13 @@ Trate de respetar los principios SOLID de diseño orientado a objetos. Recuerde 
 Por último, tendrá que comentar en un informe la solución diseñada, haciendo hincapié en las decisiones de diseño que ha implementado.
 
 ## Descripción de los requisitos del sistema <a name="requisitos"></a>
+
 > [Volver al índice](#índice)
 
 > Rutas
-> 
+>
 > Para cada ruta incluida dentro del sistema, se debe almacenar la información siguiente:
+>
 > 1. ID único de la ruta.
 > 2. Nombre de la ruta.
 > 3. Geolocalización del inicio (coordenadas).
@@ -44,8 +48,9 @@ Por último, tendrá que comentar en un informe la solución diseñada, haciendo
 > 9. Calificación media de la ruta.
 
 > Usuarios
-> 
+>
 > Dentro del sistema, necesitamos la siguiente información de los usuarios:
+>
 > 1. ID único del usuario (puede ser un username creado por el usuario en el registro o un valor generado automáticamente por el sistema).
 > 2. Nombre del usuario.
 > 3. Actividades que realiza: Correr o bicicleta.
@@ -57,8 +62,9 @@ Por último, tendrá que comentar en un informe la solución diseñada, haciendo
 > 9. Histórico de rutas: Los usuarios deben almacenar el historial de rutas realizadas desde que se registraron en el sistema. La información almacenada en esta estructura de datos deberá contener la información de la fecha y el ID de la ruta realizada. Nótese que un usuario puede realizar más de una ruta al día y está decisión puede afectar al tipo de estructura en el que se almacena la información.
 
 > Grupos
-> 
+>
 > Un grupo de usuarios engloba la información de los usuarios que se unen para realizar rutas juntos.
+>
 > 1. ID único del grupo.
 > 2. Nombre del grupo.
 > 3. Participantes: IDs de los miembros del grupo.
@@ -68,8 +74,9 @@ Por último, tendrá que comentar en un informe la solución diseñada, haciendo
 > 7. Histórico de rutas realizadas por el grupo: Información similar que almacenan los usuarios pero en este caso referente a los grupos. Nótese que un usuario puede realizar rutas con un grupo y/o de manera individual el mismo día. Es decir, a modo de simplificación, asumimos que todos los usuarios de un grupo realizan la actividad cuando se planifica. Aunque, también pueden realizar otras actividades de manera individual.
 
 > Retos
-> 
+>
 > Los retos serán otra entidad dentro del sistema. Esta entidad deberá contener toda la información asociada a objetivos de entrenamientos:
+
 1. ID único del reto.
 2. Nombre del reto.
 3. Rutas que forman parte del reto.
@@ -77,52 +84,57 @@ Por último, tendrá que comentar en un informe la solución diseñada, haciendo
 5. Km totales a realizar (como la suma de los kms de las rutas que lo engloban)
 6. Usuarios que están realizando el reto.
 
-
 ### Funcionamiento <a name="funcionamiento"></a>
+
 > [Volver al índice](#índice)
 
 > Para comprobar el funcionamiento de su diseño deberá crear:
+>
 > 1. Al menos 10 rutas distintas.
 > 2. Incluir al menos 20 usuarios distintos.
 > 3. Un mínimo de 5 grupos.
 > 4. Al menos 3 retos.
 >
 > En este punto, deberá hacer uso del módulo Inquirer.js para la gestión de una línea de comandos interactiva. De este modo, su aplicación deberá permitir añadir, borrar y modificar rutas, usuarios, grupos y retos. Para ello, le recomendamos que lea el Capítulo 1 del libro Essential TypeScript: From Beginner to Pro, dado que se describe un ejemplo detallado de su uso, incluyendo cómo podría hacer para que toda la información introducida persista mediante el uso del paquete Lowdb. Recuerde hacer uso de las versiones de los paquetes utilizadas en el libro.
-> 
+>
 > En cuanto a la gestión avanzada de rutas, usuarios, grupos y retos, simplemente se requiere poder navegar la información asociada a estás entidades. Para cada tipo de información se podrá mostrar la información correspondiente de la siguiente manera:
-> 
+>
 > Rutas:
+>
 > - Alfabéticamente por nombre de la ruta, ascendente y descendente.
 > - Cantidad de usuarios que realizan las rutas, ascendente y descendente.
 > - Por longitud de la ruta, ascendente y descendente.
 > - Por la calificación media de la ruta, ascendente y descendente.
 > - Ordenar por actividad: correr o ciclismo.
-> 
+>
 > Usuarios:
+>
 > - Alfabéticamente por nombre del usuario, ascendente y descendente.
 > - Por cantidad de KM realizados (ascendente y descendentemente) en función de la semana actual, mes o año.
-> 
+>
 > Grupos:
+>
 > - Alfabéticamente por nombre de la grupo, ascendente y descendente.
 > - Por cantidad de KM realizados conjuntamente (ascendente y descendentemente) en función de la semana actual, mes o año.
 > - Por la cantidad de miembros que lo componen, ascendente y descendente.
-> 
+>
 > Retos:
 > Alfabéticamente por nombre del reto, ascendente y descendente.
 > Por cantidad de KM que se deben realizar, ascendente y descendente.
 > Por la cantidad de usuarios que lo están realizando, ascendente y descendente.
 
 > #### Clase Gestor
+>
 > Por último, deberá crear una clase Gestor que permita gestionar el tratamiento de la información del sistema.
-> 
+>
 > Para el funcionamiento de la clase Gestor, también necesitará hacer uso de Inquirer.js. En concreto, un usuario podrá:
 > Registrarse en el sistema. Un usuario que se conecte por primera vez al sistema deberá poder incluir su información para ser almacenada en el sistema. Asimismo, un usuario podrá visualizar el listado de usuarios existentes dentro del sistema y añadir/borrar amigos.
 > Visualizar todas las rutas existentes dentro del sistema. En este apartado se deben poder consultar el listado de rutas así como acceder a la información completa de cada una de ellas.
 > Unirse a un grupo existente. Este apartado considera la opción de un usuario que desea incluirse dentro de un grupo ya existente en el sistema.
 > Visualizar, crear y borrar grupos. Un usuario podrá borrar un grupo, pero solo si esta ha sido creado por él, es decir, no se podrá borrar un grupo pre-cargado en el sistema. Por otro lado, los grupos se podrán guardar usando el mismo sistema empleado para guardar la información cargada en el sistema. Por último, considere que en posteriores conexiones al sistema, el usuario podrá desear borrar un grupo que haya creado anteriormente. Debido a esto, se deberá distinguir entre los grupos creados por el usuario y los creados por el sistema con el objetivo de evitar borrar información sin permiso.
 
-
 ### Tipos de datos (rutas, retos, usuarios y grupos) <a name="tipos"></a>
+
 > [Volver al índice](#índice)
 
 > El código define una clase llamada "usuario" que representa a un usuario en un sistema de seguimiento de actividades físicas.
@@ -140,50 +152,55 @@ El código que representa la clase tiene las siguientes propiedades privadas:
 El constructor de la clase toma como argumentos los valores para estas propiedades y los asigna a los atributos correspondientes de la instancia actual utilizando la palabra clave "this".
 
 ```typescript
-export class usuario{
-    private id: string
-    private nombre: string
-    private actividades: "Bicicleta" | "Correr"
-    private amigos: string [] //usuarios con los que interacciona
-    private historicoRutas: {fecha: Date; ruta: string } []; //ID de la ruta y fecha
+export class usuario {
+  private id: string;
+  private nombre: string;
+  private actividades: "Bicicleta" | "Correr";
+  private amigos: string[]; //usuarios con los que interacciona
+  private historicoRutas: { fecha: Date; ruta: string }[]; //ID de la ruta y fecha
 
-    constructor(id: string, nombre: string, actividades: "Bicicleta" | "Correr", amigos: string [], historicoRutas: { fecha: Date; ruta: string }[]) {
-            this.id = id
-            this.nombre = nombre
-            this.actividades = actividades
-            this.amigos = amigos
-            this.historicoRutas = historicoRutas
-         }
-    
-    public getId(): string {
-        return this.id
-    }
-    public getNombre(): string {
-        return this.nombre;
-    }
+  constructor(
+    id: string,
+    nombre: string,
+    actividades: "Bicicleta" | "Correr",
+    amigos: string[],
+    historicoRutas: { fecha: Date; ruta: string }[]
+  ) {
+    this.id = id;
+    this.nombre = nombre;
+    this.actividades = actividades;
+    this.amigos = amigos;
+    this.historicoRutas = historicoRutas;
+  }
 
-    public getActividades(): "Bicicleta" | "Correr" {
-        return  this.actividades;
-    }
+  public getId(): string {
+    return this.id;
+  }
+  public getNombre(): string {
+    return this.nombre;
+  }
 
-    public getAmigos(): string [] {
-        return this.amigos;
-    }
+  public getActividades(): "Bicicleta" | "Correr" {
+    return this.actividades;
+  }
 
-    public getHistoricoRutas(): { fecha: Date; ruta: string }[] {
-        return this.historicoRutas
-    } 
+  public getAmigos(): string[] {
+    return this.amigos;
+  }
+
+  public getHistoricoRutas(): { fecha: Date; ruta: string }[] {
+    return this.historicoRutas;
+  }
 }
 
-module.exports={
-    usuario
-}
+module.exports = {
+  usuario,
+};
 ```
 
 La clase también define getters públicos para cada una de las propiedades, lo que permite acceder a ellas desde fuera de la clase.
 
 Por último, se exporta la clase "usuario" para que pueda ser utilizada en otros archivos mediante la sintaxis de "require" o "import".
-
 
 #### Tests de la clase usuario:
 
@@ -192,37 +209,81 @@ Se ha diseñado un conjunto de pruebas unitarias escritas en TypeScript utilizan
 Primero definimos una variable llamada usuario1 que es de tipo usuario. Se está creando una instancia de la clase usuario mediante el constructor y se le están pasando varios argumentos: "USU1" que es el id del usuario, "Paco" que es el nombre del usuario, "Correr" que es la actividad principal del usuario, ["USU2"] que es un arreglo con los ids de los amigos del usuario, ["GR1"] que es un arreglo con los ids de los grupos de amigos del usuario y finalmente, `[ { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" }, { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" }, { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" } ]` que es un arreglo de objetos, cada uno de los cuales representa una ruta y su fecha.
 
 ```typescript
-const usuario1: usuario = new usuario("USU1", "Paco", "Correr", ["USU2"], ["GR1"], [ { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" }, { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" }, { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" } ]);
-
+const usuario1: usuario = new usuario(
+  "USU1",
+  "Paco",
+  "Correr",
+  ["USU2"],
+  ["GR1"],
+  [
+    { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" },
+    { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" },
+    { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" },
+  ]
+);
 ```
 
 Luego pasamos a cada prueba se describe con una cadena de texto y se ejecuta dentro de un bloque "it". Dentro de cada bloque "it", se llama a un método de la instancia de usuario, que en su mayoría son getters, y se espera que su resultado sea igual al valor esperado utilizando la sintaxis de expect.
 
 ```typescript
-import { usuario } from '../../src/types/usuarios';
-import 'mocha';
-import { expect } from 'chai'
+import { usuario } from "../../src/types/usuarios";
+import "mocha";
+import { expect } from "chai";
 
+const usuario1: usuario = new usuario(
+  "USU1",
+  "Paco",
+  "Correr",
+  ["USU2"],
+  ["GR1"],
+  [
+    { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" },
+    { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" },
+    { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" },
+    { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" },
+    { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" },
+  ]
+);
 
-const usuario1: usuario = new usuario("USU1", "Paco", "Correr", ["USU2"], ["GR1"], [ { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" }, { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" }, { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" } ]);
-
-
-describe('Comprobar clase Usuario', () => {
-    it('Metodos: getId(): string', () => {
-        expect(usuario1.getId()).to.be.equal('USU1');
-    });
-    it('Metodos: getNombre(): string', () => {
-        expect(usuario1.getNombre()).to.be.equal('Paco');
-    });
-    it('Metodos: getActividades(): "Bicicleta" | "Correr"', () => {
-        expect(usuario1.getActividades()).to.be.equal('Correr');
-    });
-    it('Metodos: getAmigos(): string []', () => {
-        expect(usuario1.getAmigos()).to.be.eql(['USU2']);
-    });
-    it('Metodos: getHistoricoRutas(): { fecha: Date; ruta: string }[]', () => {
-        expect(usuario1.getHistoricoRutas()).to.be.eql([ { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" }, { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" }, { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" }, { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" } ]);
-    });
+describe("Comprobar clase Usuario", () => {
+  it("Metodos: getId(): string", () => {
+    expect(usuario1.getId()).to.be.equal("USU1");
+  });
+  it("Metodos: getNombre(): string", () => {
+    expect(usuario1.getNombre()).to.be.equal("Paco");
+  });
+  it('Metodos: getActividades(): "Bicicleta" | "Correr"', () => {
+    expect(usuario1.getActividades()).to.be.equal("Correr");
+  });
+  it("Metodos: getAmigos(): string []", () => {
+    expect(usuario1.getAmigos()).to.be.eql(["USU2"]);
+  });
+  it("Metodos: getHistoricoRutas(): { fecha: Date; ruta: string }[]", () => {
+    expect(usuario1.getHistoricoRutas()).to.be.eql([
+      { fecha: new Date("2023-02-19T18:25:43.511Z"), ruta: "R1" },
+      { fecha: new Date("2023-03-13T18:25:43.511Z"), ruta: "R2" },
+      { fecha: new Date("2023-01-30T18:25:43.511Z"), ruta: "R2" },
+      { fecha: new Date("2022-01-30T18:25:43.511Z"), ruta: "R2" },
+      { fecha: new Date("2023-02-14T18:25:43.511Z"), ruta: "R2" },
+      { fecha: new Date("2022-06-13T18:25:43.511Z"), ruta: "R3" },
+      { fecha: new Date("2022-07-13T18:25:43.511Z"), ruta: "R3" },
+      { fecha: new Date("2022-07-08T18:25:43.511Z"), ruta: "R3" },
+      { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R4" },
+      { fecha: new Date("2023-02-12T18:25:43.511Z"), ruta: "R4" },
+    ]);
+  });
 });
 ```
 
@@ -239,7 +300,6 @@ Esta clase `usuario` cumple los principios SOLID con la siguiente justificación
 - **Interface Segregation Principle (ISP)**: La clase usuario no implementa interfaces, por lo que no es aplicable al principio ISP.
 
 - **Dependency Inversion Principle (DIP)**: La clase usuario no depende de ninguna otra clase de alto nivel, sino que es una clase de bajo nivel utilizada por otras clases. Por lo tanto, cumple con el principio DIP.
-
 
 > El código define una clase llamada "grupo" que representa a un grupo de usuarios en un sistema de seguimiento de actividades físicas.
 
@@ -318,26 +378,52 @@ En concreto, se han definido cuatro tests para los siguientes métodos:
 - getHistoricoRutas(): este método debería devolver un array con los registros del historial de rutas del grupo, por lo que se comprueba que el array devuelto por el método sea igual al array de registros que se ha pasado al constructor al crear el objeto grupo1.
 
 ```typescript
-import { grupo } from '../../src/types/grupos';
-import 'mocha';
-import { expect } from 'chai'
+import { grupo } from "../../src/types/grupos";
+import "mocha";
+import { expect } from "chai";
 
+const grupo1: grupo = new grupo(
+  "G1",
+  "Grupo de aventureros",
+  ["USU1", "USU2"],
+  [
+    {
+      fecha: new Date("2022-05-12T18:25:43.511Z"),
+      ruta: "R2",
+      usuarios: ["USU1", "USU2"],
+    },
+    {
+      fecha: new Date("2022-05-12T18:25:43.511Z"),
+      ruta: "R2",
+      usuarios: ["USU1"],
+    },
+  ]
+);
 
-const grupo1: grupo = new grupo("G1", "Grupo de aventureros", ["USU1", "USU2"], [ { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R2", usuarios: ["USU1", "USU2"] }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R2", usuarios: ["USU1"] } ]);
-
-describe('Comprobar clase Grupo', () => {
-    it('Metodos: getId(): string', () => {
-        expect(grupo1.getId()).to.be.equal('G1');
-    });
-    it('Metodos: getNombre(): string', () => {
-        expect(grupo1.getNombre()).to.be.equal('Grupo de aventureros');
-    });
-    it('Metodos: getParticipantes(): string []', () => {
-        expect(grupo1.getParticipantes()).to.be.eql(['USU1', 'USU2']);
-    });
-    it('Metodos: getHistoricoRutas(): { fecha: Date; ruta: string, usuarios: string [] }[]', () => {
-        expect(grupo1.getHistoricoRutas()).to.be.eql([ { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R2", usuarios: ["USU1", "USU2"] }, { fecha: new Date("2022-05-12T18:25:43.511Z"), ruta: "R2", usuarios: ["USU1"] } ]);
-    });
+describe("Comprobar clase Grupo", () => {
+  it("Metodos: getId(): string", () => {
+    expect(grupo1.getId()).to.be.equal("G1");
+  });
+  it("Metodos: getNombre(): string", () => {
+    expect(grupo1.getNombre()).to.be.equal("Grupo de aventureros");
+  });
+  it("Metodos: getParticipantes(): string []", () => {
+    expect(grupo1.getParticipantes()).to.be.eql(["USU1", "USU2"]);
+  });
+  it("Metodos: getHistoricoRutas(): { fecha: Date; ruta: string, usuarios: string [] }[]", () => {
+    expect(grupo1.getHistoricoRutas()).to.be.eql([
+      {
+        fecha: new Date("2022-05-12T18:25:43.511Z"),
+        ruta: "R2",
+        usuarios: ["USU1", "USU2"],
+      },
+      {
+        fecha: new Date("2022-05-12T18:25:43.511Z"),
+        ruta: "R2",
+        usuarios: ["USU1"],
+      },
+    ]);
+  });
 });
 ```
 
@@ -357,155 +443,161 @@ Esta clase `grupo` cumple los principios SOLID con la siguiente justificación:
 
 - **Dependency Inversion Principle (DIP)**: La clase grupo depende solo de tipos abstractos y no de implementaciones concretas, lo que permite que se puedan intercambiar diferentes implementaciones sin afectar su funcionalidad.
 
-
-> El código define una clase llamada "ruta" que representa una ruta en un sistema de seguimiento de actividades físicas. 
+> El código define una clase llamada "ruta" que representa una ruta en un sistema de seguimiento de actividades físicas.
 
 #### Clase ruta:
 
- La clase ruta contiene información sobre una ruta, incluyendo su identificación, nombre, coordenadas de inicio y finalización, longitud, desnivel medio, tipo de actividad (bicicleta o correr) y calificación media. La clase también tiene métodos para obtener y establecer cada uno de estos valores.
+La clase ruta contiene información sobre una ruta, incluyendo su identificación, nombre, coordenadas de inicio y finalización, longitud, desnivel medio, tipo de actividad (bicicleta o correr) y calificación media. La clase también tiene métodos para obtener y establecer cada uno de estos valores.
 
 ```typescript
 export class ruta {
-    private id: string
-    private nombre: string
-    private coordenadasInicio: string
-    private coordenadasFinal: string
-    private longitudRuta: number
-    private desnivelMedio: number
-    private tipoActividad: 'Bicicleta' | 'Correr'
-    private calificacionMedia: number
+  private id: string;
+  private nombre: string;
+  private coordenadasInicio: string;
+  private coordenadasFinal: string;
+  private longitudRuta: number;
+  private desnivelMedio: number;
+  private tipoActividad: "Bicicleta" | "Correr";
+  private calificacionMedia: number;
 
-    constructor(id: string, nombre: string, coordenadasInicio: string, coordenadasFinal: string, longitudRuta: number, desnivelMedio: number, tipoActividad: 'Bicicleta' | 'Correr', calificacionMedia: number){
-        this.id = id;
-        this.nombre = nombre;
-        this.coordenadasInicio = coordenadasInicio;
-        this.coordenadasFinal = coordenadasFinal;
-        this.longitudRuta = longitudRuta;
-        this.desnivelMedio = desnivelMedio;
-        this.tipoActividad = tipoActividad;
-        this.calificacionMedia = calificacionMedia;
-    }
+  constructor(
+    id: string,
+    nombre: string,
+    coordenadasInicio: string,
+    coordenadasFinal: string,
+    longitudRuta: number,
+    desnivelMedio: number,
+    tipoActividad: "Bicicleta" | "Correr",
+    calificacionMedia: number
+  ) {
+    this.id = id;
+    this.nombre = nombre;
+    this.coordenadasInicio = coordenadasInicio;
+    this.coordenadasFinal = coordenadasFinal;
+    this.longitudRuta = longitudRuta;
+    this.desnivelMedio = desnivelMedio;
+    this.tipoActividad = tipoActividad;
+    this.calificacionMedia = calificacionMedia;
+  }
 
-    setId(id: string){
-        this.id = id
-    }
+  setId(id: string) {
+    this.id = id;
+  }
 
-    getId(): string {
-        return this.id
-    }
+  getId(): string {
+    return this.id;
+  }
 
-    setNombre(nombre: string){
-        this.nombre = nombre
-    }
+  setNombre(nombre: string) {
+    this.nombre = nombre;
+  }
 
-    getNombre(): string {
-        return this.nombre
-    }
+  getNombre(): string {
+    return this.nombre;
+  }
 
-    setCoordenadasInicio(coordenadasInicio: string){
-        this.coordenadasInicio = coordenadasInicio
-    }
+  setCoordenadasInicio(coordenadasInicio: string) {
+    this.coordenadasInicio = coordenadasInicio;
+  }
 
-    getCoordenadasInicio(): string {
-        return this.coordenadasInicio
-    }
+  getCoordenadasInicio(): string {
+    return this.coordenadasInicio;
+  }
 
-    setCoordenadasFinal(coordenadasFinal: string){
-        this.coordenadasFinal = coordenadasFinal
-    }
+  setCoordenadasFinal(coordenadasFinal: string) {
+    this.coordenadasFinal = coordenadasFinal;
+  }
 
-    getCoordenadasFinal(): string {
-        return this.coordenadasFinal
-    }
+  getCoordenadasFinal(): string {
+    return this.coordenadasFinal;
+  }
 
-    setLongitudRuta(longitudRuta: number){
-        this.longitudRuta = longitudRuta
-    }
+  setLongitudRuta(longitudRuta: number) {
+    this.longitudRuta = longitudRuta;
+  }
 
-    getLongitudRuta(): number {
-        return this.longitudRuta
-    }
+  getLongitudRuta(): number {
+    return this.longitudRuta;
+  }
 
-    setDesnivelMedio(desnivelMedio: number){
-        this.desnivelMedio = desnivelMedio
-    }
+  setDesnivelMedio(desnivelMedio: number) {
+    this.desnivelMedio = desnivelMedio;
+  }
 
-    getDesnivelMedio(): number {
-        return this.desnivelMedio
-    }
+  getDesnivelMedio(): number {
+    return this.desnivelMedio;
+  }
 
-    setTipoActividad(tipoActividad: 'Bicicleta' | 'Correr'){
-        this.tipoActividad = tipoActividad
-    }
+  setTipoActividad(tipoActividad: "Bicicleta" | "Correr") {
+    this.tipoActividad = tipoActividad;
+  }
 
-    getTipoActividad(): 'Bicicleta' | 'Correr'  {
-        return this.tipoActividad
-    }
+  getTipoActividad(): "Bicicleta" | "Correr" {
+    return this.tipoActividad;
+  }
 
-    setCalificacionMedia(calificacionMedia: number){
-        this.calificacionMedia = calificacionMedia
-    }
+  setCalificacionMedia(calificacionMedia: number) {
+    this.calificacionMedia = calificacionMedia;
+  }
 
-    getCalificacionMedia(): number {
-        return this.calificacionMedia
-    }
-    
+  getCalificacionMedia(): number {
+    return this.calificacionMedia;
+  }
 }
 
 module.exports = {
-    ruta
-}
+  ruta,
+};
 ```
 
-La clase tiene un constructor que toma valores para todos los atributos y los asigna a las variables correspondientes. 
+La clase tiene un constructor que toma valores para todos los atributos y los asigna a las variables correspondientes.
 
 Además, tiene métodos setter y getter para cada uno de los atributos, lo que permite cambiar y obtener los valores de cada uno de ellos. Cada método se llama set y get, respectivamente, seguido del nombre del atributo, y devuelve el mismo. Por ejemplo, setId establece el valor de id, y getId devuelve el valor actual de id.
-
 
 #### Tests de la clase ruta:
 
 A continuación tenemos los tests que se han diseñado para esta clase. En la primera línea se importa la clase ruta desde su ruta relativa. Luego se importan los módulos mocha y chai, que son librerías para facilitar la escritura de pruebas.
 
 ```typescript
-import { ruta } from '../../src/types/rutas';
-import 'mocha';
-import { expect } from 'chai'
+import { ruta } from "../../src/types/rutas";
+import "mocha";
+import { expect } from "chai";
 
-const ruta1: ruta = new ruta(  '', '', '', '', 0, 0, 'Correr', 0);
+const ruta1: ruta = new ruta("", "", "", "", 0, 0, "Correr", 0);
 
-describe('Comprobar clase Ruta', () => {
-    it('Metodos: setId(id: string), getId(): string', () => {
-      ruta1.setId('R1');
-      expect(ruta1.getId()).to.be.equal('R1');
-    });
-    it('Metodos: setNombre(nombre: string), getNombre(): string', () => {
-        ruta1.setNombre('Ruta 1');
-        expect(ruta1.getNombre()).to.be.equal('Ruta 1');
-    });
-    it('Metodos: setCoordenadasInicio(coordenadasInicio: string), getCoordenadasInicio(): string', () => {
-        ruta1.setCoordenadasInicio('41.397158, 2.160873');
-        expect(ruta1.getCoordenadasInicio()).to.be.equal('41.397158, 2.160873');
-    });
-    it('Metodos: setCoordenadasFinal(coordenadasFinal: string), getCoordenadasFinal(): string', () => {
-        ruta1.setCoordenadasFinal('41.397158, 2.160873');
-        expect(ruta1.getCoordenadasFinal()).to.be.equal('41.397158, 2.160873');
-    });
-    it('Metodos: setLongitudRuta(longitudRuta: number), getLongitudRuta(): number', () => {
-        ruta1.setLongitudRuta(15);
-        expect(ruta1.getLongitudRuta()).to.be.equal(15);
-    });
-    it('Metodos: setDesnivelMedio(desnivelMedio: number), getDesnivelMedio(): number', () => {
-        ruta1.setDesnivelMedio(4);
-        expect(ruta1.getDesnivelMedio()).to.be.equal(4);
-    });
-    it('Metodos: setTipoActividad(tipoActividad: "Bicicleta" | "Correr"), getTipoActividad(): "Bicicleta" | "Correr"', () => {
-        ruta1.setTipoActividad('Bicicleta');
-        expect(ruta1.getTipoActividad()).to.be.equal('Bicicleta');
-    });
-    it('Metodos: setCalificacionMedia(calificacionMedia: number), getCalificacionMedia(): number', () => {
-        ruta1.setCalificacionMedia(3);
-        expect(ruta1.getCalificacionMedia()).to.be.equal(3);
-    });
+describe("Comprobar clase Ruta", () => {
+  it("Metodos: setId(id: string), getId(): string", () => {
+    ruta1.setId("R1");
+    expect(ruta1.getId()).to.be.equal("R1");
+  });
+  it("Metodos: setNombre(nombre: string), getNombre(): string", () => {
+    ruta1.setNombre("Ruta 1");
+    expect(ruta1.getNombre()).to.be.equal("Ruta 1");
+  });
+  it("Metodos: setCoordenadasInicio(coordenadasInicio: string), getCoordenadasInicio(): string", () => {
+    ruta1.setCoordenadasInicio("41.397158, 2.160873");
+    expect(ruta1.getCoordenadasInicio()).to.be.equal("41.397158, 2.160873");
+  });
+  it("Metodos: setCoordenadasFinal(coordenadasFinal: string), getCoordenadasFinal(): string", () => {
+    ruta1.setCoordenadasFinal("41.397158, 2.160873");
+    expect(ruta1.getCoordenadasFinal()).to.be.equal("41.397158, 2.160873");
+  });
+  it("Metodos: setLongitudRuta(longitudRuta: number), getLongitudRuta(): number", () => {
+    ruta1.setLongitudRuta(15);
+    expect(ruta1.getLongitudRuta()).to.be.equal(15);
+  });
+  it("Metodos: setDesnivelMedio(desnivelMedio: number), getDesnivelMedio(): number", () => {
+    ruta1.setDesnivelMedio(4);
+    expect(ruta1.getDesnivelMedio()).to.be.equal(4);
+  });
+  it('Metodos: setTipoActividad(tipoActividad: "Bicicleta" | "Correr"), getTipoActividad(): "Bicicleta" | "Correr"', () => {
+    ruta1.setTipoActividad("Bicicleta");
+    expect(ruta1.getTipoActividad()).to.be.equal("Bicicleta");
+  });
+  it("Metodos: setCalificacionMedia(calificacionMedia: number), getCalificacionMedia(): number", () => {
+    ruta1.setCalificacionMedia(3);
+    expect(ruta1.getCalificacionMedia()).to.be.equal(3);
+  });
 });
 ```
 
@@ -515,14 +607,13 @@ Por ejemplo, el primer test comprueba que el método setId establece el valor de
 
 Cada prueba utiliza la función expect de la biblioteca chai para comprobar que el valor devuelto por el método get sea igual al valor establecido por el método set. Si el valor no es igual, la prueba fallará.
 
-
 #### Cumplimiento de los principios SOLID en la clase ruta:
 
 Esta clase `ruta` cumple los principios SOLID con la siguiente justificación:
 
 - **Single responsibility (SRP)**: La clase ruta tiene una única responsabilidad, que es representar una ruta y almacenar información relacionada con ella, como la identificación, las coordenadas, la longitud, etc. Además, los métodos de la clase se ocupan exclusivamente de la manipulación de los datos de la ruta.
 
-- **Open/Closed Principle (OCP)**:  La clase ruta es extensible ya que los desarrolladores pueden agregar nuevas características y comportamientos a la clase sin modificar su implementación actual. Por ejemplo, si se desea agregar un método para calcular la duración de una ruta, se puede implementar en una subclase de Ruta sin cambiar la clase Ruta original.
+- **Open/Closed Principle (OCP)**: La clase ruta es extensible ya que los desarrolladores pueden agregar nuevas características y comportamientos a la clase sin modificar su implementación actual. Por ejemplo, si se desea agregar un método para calcular la duración de una ruta, se puede implementar en una subclase de Ruta sin cambiar la clase Ruta original.
 
 - **Liskov Substitution Principle (LSP)**: La clase ruta no hereda de ninguna otra clase en el código proporcionado, pero si se hiciera, la clase derivada debería poder reemplazar a la clase base sin afectar el comportamiento del programa.
 
@@ -530,8 +621,7 @@ Esta clase `ruta` cumple los principios SOLID con la siguiente justificación:
 
 - **Dependency Inversion Principle (DIP)**: La clase ruta depende solo de tipos abstractos y no de implementaciones concretas, lo que permite que se puedan intercambiar diferentes implementaciones sin afectar su funcionalidad.
 
-
-> El código define una clase llamada "reto" que representa un reto en un sistema de seguimiento de actividades físicas. 
+> El código define una clase llamada "reto" que representa un reto en un sistema de seguimiento de actividades físicas.
 
 #### Clase reto:
 
@@ -547,40 +637,45 @@ El constructor de la clase reto recibe como parámetros todas estas propiedades 
 
 ```typescript
 export class reto {
-    private id: string
-    private nombre: string
-    private rutasReto: string []
-    private tipoActividad: 'Bicicleta' | 'Correr'
-    private usuariosRealizandoReto: string []
+  private id: string;
+  private nombre: string;
+  private rutasReto: string[];
+  private tipoActividad: "Bicicleta" | "Correr";
+  private usuariosRealizandoReto: string[];
 
+  constructor(
+    id: string,
+    nombre: string,
+    rutasReto: string[],
+    tipoActividad: "Bicicleta" | "Correr",
+    usuariosRealizandoReto: string[]
+  ) {
+    this.id = id;
+    this.nombre = nombre;
+    this.rutasReto = rutasReto;
+    this.tipoActividad = tipoActividad;
+    this.usuariosRealizandoReto = usuariosRealizandoReto;
+  }
 
-    constructor( id: string, nombre: string, rutasReto: string [], tipoActividad: 'Bicicleta' | 'Correr', usuariosRealizandoReto: string []) {
-        this.id = id;
-        this.nombre = nombre;
-        this.rutasReto = rutasReto;
-        this.tipoActividad = tipoActividad;
-        this.usuariosRealizandoReto = usuariosRealizandoReto;
-    }
-    
-    getId(): string {
-        return this.id
-    }
+  getId(): string {
+    return this.id;
+  }
 
-    getNombre(): string {
-        return this.nombre
-    }
+  getNombre(): string {
+    return this.nombre;
+  }
 
-    getRutasReto(): string [] {
-        return this.rutasReto
-    }
+  getRutasReto(): string[] {
+    return this.rutasReto;
+  }
 
-    getTipoActividad(): 'Bicicleta' | 'Correr' {
-        return this.tipoActividad
-    }
+  getTipoActividad(): "Bicicleta" | "Correr" {
+    return this.tipoActividad;
+  }
 
-    public getUsuariosRealizandoReto(): string [] {
-        return this.usuariosRealizandoReto;
-    }
+  public getUsuariosRealizandoReto(): string[] {
+    return this.usuariosRealizandoReto;
+  }
 }
 ```
 
@@ -601,28 +696,34 @@ Los tests comprueban que la clase "reto" funciona correctamente y que sus métod
 Primero, se crea un objeto "reto" llamado "reto1" con los valores de las propiedades especificadas. Luego, se definen una serie de pruebas que comprueban que los métodos de acceso a las propiedades del objeto "reto1" funcionan correctamente.
 
 ```typescript
-import { reto } from '../../src/types/retos';
-import 'mocha';
-import { expect } from 'chai'
+import { reto } from "../../src/types/retos";
+import "mocha";
+import { expect } from "chai";
 
-const reto1: reto = new reto('C1', 'El reto de la muerte', ['R1', 'R2'], 'Bicicleta', ['USU1']);
+const reto1: reto = new reto(
+  "C1",
+  "El reto de la muerte",
+  ["R1", "R2"],
+  "Bicicleta",
+  ["USU1"]
+);
 
-describe('Comprobar clase Reto', () => {
-    it('Metodos: getId(): string', () => {
-        expect(reto1.getId()).to.be.equal('C1');
-    });
-    it('Metodos: getNombre(): string', () => {
-        expect(reto1.getNombre()).to.be.equal('El reto de la muerte');
-    });
-    it('Metodos: getRutasReto(): string []', () => {
-        expect(reto1.getRutasReto()).to.be.eql(['R1', 'R2']);
-    });
-    it('Metodos: getTipoActividad(): "Bicicleta" | "Correr"', () => {
-        expect(reto1.getTipoActividad()).to.be.equal('Bicicleta');
-    });
-    it('Metodos: getUsuariosRealizandoReto(): string []', () => {
-        expect(reto1.getUsuariosRealizandoReto()).to.be.eql(['USU1']);
-    });
+describe("Comprobar clase Reto", () => {
+  it("Metodos: getId(): string", () => {
+    expect(reto1.getId()).to.be.equal("C1");
+  });
+  it("Metodos: getNombre(): string", () => {
+    expect(reto1.getNombre()).to.be.equal("El reto de la muerte");
+  });
+  it("Metodos: getRutasReto(): string []", () => {
+    expect(reto1.getRutasReto()).to.be.eql(["R1", "R2"]);
+  });
+  it('Metodos: getTipoActividad(): "Bicicleta" | "Correr"', () => {
+    expect(reto1.getTipoActividad()).to.be.equal("Bicicleta");
+  });
+  it("Metodos: getUsuariosRealizandoReto(): string []", () => {
+    expect(reto1.getUsuariosRealizandoReto()).to.be.eql(["USU1"]);
+  });
 });
 ```
 
@@ -654,8 +755,8 @@ Esta clase `reto` cumple los principios SOLID con la siguiente justificación:
 
 - **Dependency Inversion Principle (DIP)**: La clase "reto" no cumple con el principio de inversión de dependencia (DIP), ya que no se basa en abstracciones, sino que depende directamente de tipos concretos para sus propiedades. En caso de que se necesite utilizar diferentes tipos para estas propiedades, podría ser necesario modificar la implementación de la clase "reto".
 
-
 ### Colecciones de datos <a name="colecciones"></a>
+
 > [Volver al índice](#índice)
 
 > A continuación se detallan las colecciones de datos que se utilizarán en la aplicación.
@@ -956,15 +1057,21 @@ Primero se importan las dependencias necesarias, incluyendo la clase usuario y l
 Luego se define un objeto usuario3 que contiene algunos datos de un usuario, y se crean instancias de las tres colecciones con parámetros vacíos ([]).
 
 ```typescript
-import { usuario } from '../../src/types/usuarios';
-import { rutaCollection } from '../../src/collections/rutaCollection';
-import { retoCollection } from '../../src/collections/retoCollection';
-import { usuarioCollection } from '../../src/collections/usuarioCollection';
-import 'mocha';
-import { expect } from 'chai'
+import { usuario } from "../../src/types/usuarios";
+import { rutaCollection } from "../../src/collections/rutaCollection";
+import { retoCollection } from "../../src/collections/retoCollection";
+import { usuarioCollection } from "../../src/collections/usuarioCollection";
+import "mocha";
+import { expect } from "chai";
 
-
-const usuario3: usuario = new usuario("USU17", "Juan", "Correr", ["USU1"], ["GR2"], [ { fecha: new Date("2022-05-20T18:25:43.511Z"), ruta: "R3" } ]);
+const usuario3: usuario = new usuario(
+  "USU17",
+  "Juan",
+  "Correr",
+  ["USU1"],
+  ["GR2"],
+  [{ fecha: new Date("2022-05-20T18:25:43.511Z"), ruta: "R3" }]
+);
 const usuarioCollection1: usuarioCollection = new usuarioCollection([]);
 const rutaCollection1: rutaCollection = new rutaCollection([]);
 const retoCollection1: retoCollection = new retoCollection([]);
@@ -975,31 +1082,42 @@ A continuación, se describe un conjunto de pruebas utilizando la función descr
 Cada prueba se define mediante la función it de mocha, y se le da un nombre descriptivo que explica qué se está evaluando. Dentro de cada prueba se utiliza la función expect de la librería chai para definir una serie de expectativas que deben cumplirse para que la prueba sea exitosa.
 
 ```typescript
-describe('Comprobar clase usuarioCollection', () => {
-    it('Metodo: getColeccionUsuarios(): usuario[]', () => {
-        expect(usuarioCollection1.getColeccionUsuarios().length).to.be.eql(15);
-    });
-    it('Metodo: getHistoricoRutas(id: string): { fecha: Date, ruta: string }[] | undefined', () => {
-        expect(usuarioCollection1.getHistoricoRutas("USU3")).to.be.eql([ { fecha: "2022-05-12", ruta: "R3" } ]);
-    });
-    it('Metodo: addUsuario(usuario: usuario)', () => {
-        usuarioCollection1.addUsuario(usuario3);
-        expect(usuarioCollection1.getColeccionUsuarios().length).to.be.equal(16);
-    });
-    it('Metodo: removeUsuario(id: string)', () => {
-        usuarioCollection1.removeUsuario("USU17");
-        expect(usuarioCollection1.getColeccionUsuarios().length).to.be.equal(15);
-    });
-    it('Metodo: getEstadisticasEntrenamiento(id: string, tiempo: "semana" | "mes" | "año"): {km: number, desnivel: number }', () => {
-        expect(usuarioCollection1.getEstadisticasEntrenamiento(rutaCollection1, "USU1", "mes")).to.be.eql({km: 15, desnivel: 200});
-    });
-    it('Metodo: getRutaFavorita(id_usuario: string): string | string [] | undefined', () => {
-        expect(usuarioCollection1.getRutaFavorita(rutaCollection1, "USU1")).to.be.eql(["R2", "R3", "R4"]);
-    });
-    it('Metodo: getRetosActivos(id_usuario: string): string[]', () => {
-        expect(usuarioCollection1.getRetosActivos(retoCollection1, "USU1")).to.be.eql(["C1", "C2"]);
-    });
-
+describe("Comprobar clase usuarioCollection", () => {
+  it("Metodo: getColeccionUsuarios(): usuario[]", () => {
+    expect(usuarioCollection1.getColeccionUsuarios().length).to.be.eql(15);
+  });
+  it("Metodo: getHistoricoRutas(id: string): { fecha: Date, ruta: string }[] | undefined", () => {
+    expect(usuarioCollection1.getHistoricoRutas("USU3")).to.be.eql([
+      { fecha: "2022-05-12", ruta: "R3" },
+    ]);
+  });
+  it("Metodo: addUsuario(usuario: usuario)", () => {
+    usuarioCollection1.addUsuario(usuario3);
+    expect(usuarioCollection1.getColeccionUsuarios().length).to.be.equal(16);
+  });
+  it("Metodo: removeUsuario(id: string)", () => {
+    usuarioCollection1.removeUsuario("USU17");
+    expect(usuarioCollection1.getColeccionUsuarios().length).to.be.equal(15);
+  });
+  it('Metodo: getEstadisticasEntrenamiento(id: string, tiempo: "semana" | "mes" | "año"): {km: number, desnivel: number }', () => {
+    expect(
+      usuarioCollection1.getEstadisticasEntrenamiento(
+        rutaCollection1,
+        "USU1",
+        "mes"
+      )
+    ).to.be.eql({ km: 15, desnivel: 200 });
+  });
+  it("Metodo: getRutaFavorita(id_usuario: string): string | string [] | undefined", () => {
+    expect(
+      usuarioCollection1.getRutaFavorita(rutaCollection1, "USU1")
+    ).to.be.eql(["R2", "R3", "R4"]);
+  });
+  it("Metodo: getRetosActivos(id_usuario: string): string[]", () => {
+    expect(
+      usuarioCollection1.getRetosActivos(retoCollection1, "USU1")
+    ).to.be.eql(["C1", "C2"]);
+  });
 });
 ```
 
@@ -1281,56 +1399,73 @@ Los métodos de la clase incluyen:
 
 #### Tests de la colección de grupos:
 
-Los tests que se han preparado para esta clase son los siguientes: 
+Los tests que se han preparado para esta clase son los siguientes:
 
 ```typescript
-import { grupo } from '../../src/types/grupos';
-import { grupoCollection } from '../../src/collections/grupoCollection';
-import { rutaCollection } from '../../src/collections/rutaCollection';
-import 'mocha';
-import { expect } from 'chai'
+import { grupo } from "../../src/types/grupos";
+import { grupoCollection } from "../../src/collections/grupoCollection";
+import { rutaCollection } from "../../src/collections/rutaCollection";
+import "mocha";
+import { expect } from "chai";
 
 const grupoCollection1: grupoCollection = new grupoCollection([]);
 const rutaCollection1: rutaCollection = new rutaCollection([]);
-const grupo1: grupo = new grupo('GR4', 'Grupo 4', ['USU1', 'USU2', 'USU3'], [{
-    "fecha": new Date("2022-05-12T18:25:43.511Z"),
-    "ruta": "R2",
-    "usuarios": [
-        "USU1",
-        "USU2"
-    ]
-},
-{
-    "fecha": new Date("2022-05-12T18:25:43.511Z"),
-    "ruta": "R2",
-    "usuarios": [
-        "USU1"
-    ]
-}]);
+const grupo1: grupo = new grupo(
+  "GR4",
+  "Grupo 4",
+  ["USU1", "USU2", "USU3"],
+  [
+    {
+      fecha: new Date("2022-05-12T18:25:43.511Z"),
+      ruta: "R2",
+      usuarios: ["USU1", "USU2"],
+    },
+    {
+      fecha: new Date("2022-05-12T18:25:43.511Z"),
+      ruta: "R2",
+      usuarios: ["USU1"],
+    },
+  ]
+);
 
-describe('Comprobar clase GrupoCollection', () => {
-    it('Metodos: getColeccionGrupos(): grupo []', () => {
-        expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(3);
-    });
-    it('Metodos: addGrupo(grupo: grupo)', () => {
-        grupoCollection1.addGrupo(grupo1);
-        expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(4);
-    });
-    it('Metodos: removeGrupo(id: string)', () => {
-        grupoCollection1.removeGrupo('GR4');
-        expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(3);
-    });
-    it('Metodo: getEstadisticasEntrenamiento(coleccionRutas: rutaCollection ,id: string, tiempo: "semana" | "mes" | "año"): {km: number, desnivel: number }', () => {
-        expect(grupoCollection1.getEstadisticasEntrenamiento(rutaCollection1, 'G1', 'mes')).to.be.eql({ km: 15, desnivel: 200 });
-    });
-    it('Metodo: getClasificacionUsuarios(coleccionRutas: rutaCollection ,id: string, tipo: "km" | "desnivel"): {usuario: string, valor: number}[]', () => {
-        expect(grupoCollection1.getClasificacionUsuarios(rutaCollection1, 'G1', 'km')).to.be.eql([{ usuario: 'USU1', valor: 30 }, { usuario: 'USU2', valor: 15 }]);
-    });
-    it('Metodo: getRutasFavoritas(coleccionRutas: rutaCollection ,id: string): {ruta: string, frecuencia: number}[]', () => {
-        expect(grupoCollection1.getRutasFavoritas(rutaCollection1, 'G2')).to.be.eql([{ ruta: 'R3', frecuencia: 2}, { ruta: 'R4', frecuencia: 2}, { ruta: 'R5', frecuencia: 1}]);
-    });
-
-
+describe("Comprobar clase GrupoCollection", () => {
+  it("Metodos: getColeccionGrupos(): grupo []", () => {
+    expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(3);
+  });
+  it("Metodos: addGrupo(grupo: grupo)", () => {
+    grupoCollection1.addGrupo(grupo1);
+    expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(4);
+  });
+  it("Metodos: removeGrupo(id: string)", () => {
+    grupoCollection1.removeGrupo("GR4");
+    expect(grupoCollection1.getColeccionGrupos().length).to.be.eql(3);
+  });
+  it('Metodo: getEstadisticasEntrenamiento(coleccionRutas: rutaCollection ,id: string, tiempo: "semana" | "mes" | "año"): {km: number, desnivel: number }', () => {
+    expect(
+      grupoCollection1.getEstadisticasEntrenamiento(
+        rutaCollection1,
+        "G1",
+        "mes"
+      )
+    ).to.be.eql({ km: 15, desnivel: 200 });
+  });
+  it('Metodo: getClasificacionUsuarios(coleccionRutas: rutaCollection ,id: string, tipo: "km" | "desnivel"): {usuario: string, valor: number}[]', () => {
+    expect(
+      grupoCollection1.getClasificacionUsuarios(rutaCollection1, "G1", "km")
+    ).to.be.eql([
+      { usuario: "USU1", valor: 30 },
+      { usuario: "USU2", valor: 15 },
+    ]);
+  });
+  it("Metodo: getRutasFavoritas(coleccionRutas: rutaCollection ,id: string): {ruta: string, frecuencia: number}[]", () => {
+    expect(grupoCollection1.getRutasFavoritas(rutaCollection1, "G2")).to.be.eql(
+      [
+        { ruta: "R3", frecuencia: 2 },
+        { ruta: "R4", frecuencia: 2 },
+        { ruta: "R5", frecuencia: 1 },
+      ]
+    );
+  });
 });
 ```
 
@@ -1373,7 +1508,9 @@ export class rutaCollection {
 
   constructor(public coleccion: ruta[]) {
     this.database = lowdb(new FileSync("src/databases/db_rutas.json"));
-    this.databaseUsuarios = lowdb(new FileSync("src/databases/db_usuarios.json"));
+    this.databaseUsuarios = lowdb(
+      new FileSync("src/databases/db_usuarios.json")
+    );
     if (this.database.has("ruta").value()) {
       const dbItems = this.database.get("ruta").value();
       dbItems.forEach((item) =>
@@ -1439,7 +1576,10 @@ export class rutaCollection {
   }
 
   //Cantidad de usuarios que realizan las rutas, ascendente y descendente.
-  public getRutasPorCantidadUsuarios(coleccionUsuarios: usuarioCollection, orden: boolean): ruta[] {
+  public getRutasPorCantidadUsuarios(
+    coleccionUsuarios: usuarioCollection,
+    orden: boolean
+  ): ruta[] {
     if (orden) {
       return this.coleccionRutas.sort(
         (a, b) =>
@@ -1449,8 +1589,8 @@ export class rutaCollection {
     } else {
       return this.coleccionRutas.sort(
         (a, b) =>
-          this.getUsuariosFinalizados(coleccionUsuarios, b.getId()).length
-          - this.getUsuariosFinalizados(coleccionUsuarios, a.getId()).length
+          this.getUsuariosFinalizados(coleccionUsuarios, b.getId()).length -
+          this.getUsuariosFinalizados(coleccionUsuarios, a.getId()).length
       );
     }
   }
@@ -1467,7 +1607,6 @@ export class rutaCollection {
         (a, b) => b.getLongitudRuta() - a.getLongitudRuta()
       );
     }
-
   }
   public getRutasCalificacionMedia(orden: boolean): ruta[] {
     if (orden) {
@@ -1517,24 +1656,33 @@ export class rutaCollection {
     return this.coleccionRutas.find((ruta) => ruta.getId() === id);
   }
 
-
-  public addRutaRealizada(coleccionUsuarios: usuarioCollection,id: string, user_id: string) {
+  public addRutaRealizada(
+    coleccionUsuarios: usuarioCollection,
+    id: string,
+    user_id: string
+  ) {
     // buscar el usuario con ese ID.
-    const usuario = coleccionUsuarios.getColeccionUsuarios().find(usuario => usuario.getId() === user_id);
+    const usuario = coleccionUsuarios
+      .getColeccionUsuarios()
+      .find((usuario) => usuario.getId() === user_id);
     if (usuario) {
       // comprobar que la ruta existe
-      const ruta = this.coleccionRutas.find(ruta => ruta.getId() === id);
+      const ruta = this.coleccionRutas.find((ruta) => ruta.getId() === id);
       if (ruta) {
         usuario.addHistoricoRutas(new Date(Date.now()), id);
         // añadir a la base da datos
-        this.databaseUsuarios.get("usuario").find({ id: user_id }).get("historicoRutas").push({ fecha: new Date(Date.now()), ruta: id }).write();
+        this.databaseUsuarios
+          .get("usuario")
+          .find({ id: user_id })
+          .get("historicoRutas")
+          .push({ fecha: new Date(Date.now()), ruta: id })
+          .write();
       } else {
         console.log("No existe la ruta");
-      } } else {
+      }
+    } else {
       console.log("No existe el usuario");
-
     }
-
   }
 
   public getUsuariosFinalizados(
@@ -1574,43 +1722,57 @@ La clase tiene los siguientes métodos:
 - `getRutasActividad(actividad: string): ruta[]`: devuelve las rutas que corresponden a la actividad especificada en el parámetro actividad, que puede ser "Bicicleta" o "Correr".
 - `getInfoRuta(id: string, coleccionUsuarios: usuarioCollection)`: muestra la información de la ruta con el identificador id, incluyendo el número de usuarios que han finalizado la ruta y la calificación media de la ruta. El método recibe como parámetro una colección de usuarios coleccionUsuarios y utiliza el método getUsuariosFinalizados() para obtener la lista de usuarios que han finalizado la ruta.
 
-
 #### Tests de la colección de rutas:
 
 Los tests de la clase `rutaCollection` son os siguientes:
 
 ```typescript
-import { rutaCollection } from '../../src/collections/rutaCollection';
-import { ruta } from '../../src/types/rutas';
-import 'mocha';
-import { expect } from 'chai'
+import { rutaCollection } from "../../src/collections/rutaCollection";
+import { ruta } from "../../src/types/rutas";
+import "mocha";
+import { expect } from "chai";
 
 const rutaCollection1: rutaCollection = new rutaCollection([]);
 
-describe('Comprobar clase rutaCollection', () => {
-    it('Metodos: getColeccionRutas(): ruta[]', () => {
-        expect(rutaCollection1.getColeccionRutas().length).to.be.equal(4);
-    });
-    it('Metodos: addRuta(ruta: ruta)', () => {
-        const ruta1: ruta = new ruta('R5', 'Ruta de ciclismo por la costa', "28.6483,-38.6987", "29.684,-29.984" , 12, 6, 'Bicicleta', 7);
-        rutaCollection1.addRuta(ruta1);
-        expect(rutaCollection1.getColeccionRutas().length).to.be.equal(5);
-    });
-    it('Metodos: removeRuta(id: string)', () => {
-        rutaCollection1.removeRuta('R5');
-        expect(rutaCollection1.getColeccionRutas().length).to.be.equal(4);
-    });
-    
-    it('Metodo: getRutasAlfabetico(orden: boolean) : ruta[]', () => {
-        expect(rutaCollection1.getRutasAlfabetico(true)[0].getNombre()).to.be.equal('Ruta de senderismo en la montaña');
-    });
-    
-    it('Metodo: getRutasCalificacionMedia(orden: boolean) : ruta[]', () => {
-        expect(rutaCollection1.getRutasCalificacionMedia(false)[0].getNombre()).to.be.equal('Ruta de senderismo por el parque nacional');
-    });
-    it('Metodo: getRutasActividad(actividad: string) : ruta[]', () => {
-       expect(rutaCollection1.getRutasActividad("Bicicleta").length).to.be.equal(1);
-    });
+describe("Comprobar clase rutaCollection", () => {
+  it("Metodos: getColeccionRutas(): ruta[]", () => {
+    expect(rutaCollection1.getColeccionRutas().length).to.be.equal(4);
+  });
+  it("Metodos: addRuta(ruta: ruta)", () => {
+    const ruta1: ruta = new ruta(
+      "R5",
+      "Ruta de ciclismo por la costa",
+      "28.6483,-38.6987",
+      "29.684,-29.984",
+      12,
+      6,
+      "Bicicleta",
+      7
+    );
+    rutaCollection1.addRuta(ruta1);
+    expect(rutaCollection1.getColeccionRutas().length).to.be.equal(5);
+  });
+  it("Metodos: removeRuta(id: string)", () => {
+    rutaCollection1.removeRuta("R5");
+    expect(rutaCollection1.getColeccionRutas().length).to.be.equal(4);
+  });
+
+  it("Metodo: getRutasAlfabetico(orden: boolean) : ruta[]", () => {
+    expect(rutaCollection1.getRutasAlfabetico(true)[0].getNombre()).to.be.equal(
+      "Ruta de senderismo en la montaña"
+    );
+  });
+
+  it("Metodo: getRutasCalificacionMedia(orden: boolean) : ruta[]", () => {
+    expect(
+      rutaCollection1.getRutasCalificacionMedia(false)[0].getNombre()
+    ).to.be.equal("Ruta de senderismo por el parque nacional");
+  });
+  it("Metodo: getRutasActividad(actividad: string) : ruta[]", () => {
+    expect(rutaCollection1.getRutasActividad("Bicicleta").length).to.be.equal(
+      1
+    );
+  });
 });
 ```
 
@@ -1662,7 +1824,10 @@ export class retoCollection {
     return this.coleccionRetos;
   }
 
-  public getRetosUsuario(coleccionUsuario: usuarioCollection, idUsuario: string): reto[] {
+  public getRetosUsuario(
+    coleccionUsuario: usuarioCollection,
+    idUsuario: string
+  ): reto[] {
     const retosUsuario: reto[] = [];
     this.coleccionRetos.forEach((reto) => {
       if (reto.getUsuariosRealizandoReto().includes(idUsuario)) {
@@ -1670,7 +1835,6 @@ export class retoCollection {
       }
     });
     return retosUsuario;
-  
   }
 
   public addReto(reto: reto) {
@@ -1699,7 +1863,7 @@ export class retoCollection {
 
   public getInfoReto(id: string, coleccionUsuarios: usuarioCollection): void {
     const reto = this.coleccionRetos.find((ruta) => ruta.getId() === id);
-    
+
     if (reto) {
       console.log("Nombre: " + reto.getNombre());
       console.log("Tipo de actividad: " + reto.getTipoActividad());
@@ -1709,13 +1873,14 @@ export class retoCollection {
       });
       console.log("Usuarios realizando el reto: ");
       reto.getUsuariosRealizandoReto().forEach((idUsuario) => {
-        const usuario = coleccionUsuarios.getColeccionUsuarios().find((usuario) => usuario.getId() === idUsuario);
+        const usuario = coleccionUsuarios
+          .getColeccionUsuarios()
+          .find((usuario) => usuario.getId() === idUsuario);
         if (usuario) {
           console.log("Nombre: " + usuario.getNombre());
         }
       });
     }
-  
   }
 
   getRetosOrdenadosNombre(orden: "ascendente" | "descendente"): reto[] {
@@ -1730,12 +1895,17 @@ export class retoCollection {
     }
   }
 
-  public getDistanciaTotalReto(coleccionRutas: rutaCollection, id: string): number {
+  public getDistanciaTotalReto(
+    coleccionRutas: rutaCollection,
+    id: string
+  ): number {
     let distanciaTotal = 0;
     const reto = this.coleccionRetos.find((reto) => reto.getId() === id);
     if (reto) {
       reto.getRutasReto().forEach((ruta) => {
-        const rutaReto = coleccionRutas.getColeccionRutas().find((rutaReto) => rutaReto.getId() === ruta);
+        const rutaReto = coleccionRutas
+          .getColeccionRutas()
+          .find((rutaReto) => rutaReto.getId() === ruta);
         if (rutaReto) {
           distanciaTotal += rutaReto.getLongitudRuta();
         }
@@ -1743,36 +1913,62 @@ export class retoCollection {
     }
     return distanciaTotal;
   }
-  getRetosOrdenadosDistancia(coleccionRutas: rutaCollection ,orden: "ascendente" | "descendente"): reto[] {
-      console.log("Retos ordenados por distancia: ");
-      if (orden === "ascendente") {
-      return this.coleccionRetos.sort((a, b) => this.getDistanciaTotalReto(coleccionRutas, a.getId()) - 
-      this.getDistanciaTotalReto(coleccionRutas, b.getId()));
+  getRetosOrdenadosDistancia(
+    coleccionRutas: rutaCollection,
+    orden: "ascendente" | "descendente"
+  ): reto[] {
+    console.log("Retos ordenados por distancia: ");
+    if (orden === "ascendente") {
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          this.getDistanciaTotalReto(coleccionRutas, a.getId()) -
+          this.getDistanciaTotalReto(coleccionRutas, b.getId())
+      );
     } else {
-      return this.coleccionRetos.sort((a, b) => this.getDistanciaTotalReto(coleccionRutas, b.getId()) - 
-      this.getDistanciaTotalReto(coleccionRutas, a.getId()));
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          this.getDistanciaTotalReto(coleccionRutas, b.getId()) -
+          this.getDistanciaTotalReto(coleccionRutas, a.getId())
+      );
     }
   }
 
-  getRetosOrdenadosCantidadUsuarios(orden: "ascendente" | "descendente"): reto[] {
+  getRetosOrdenadosCantidadUsuarios(
+    orden: "ascendente" | "descendente"
+  ): reto[] {
     if (orden === "ascendente") {
-      return this.coleccionRetos.sort((a, b) => a.getUsuariosRealizandoReto().length - 
-      b.getUsuariosRealizandoReto().length);
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          a.getUsuariosRealizandoReto().length -
+          b.getUsuariosRealizandoReto().length
+      );
     } else {
-      return this.coleccionRetos.sort((a, b) => b.getUsuariosRealizandoReto().length - 
-      a.getUsuariosRealizandoReto().length);
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          b.getUsuariosRealizandoReto().length -
+          a.getUsuariosRealizandoReto().length
+      );
     }
   }
 
-  getRetosOrdenadosKmsTotales(coleccionRutas: rutaCollection, orden: "ascendente" | "descendente"): reto[] {
+  getRetosOrdenadosKmsTotales(
+    coleccionRutas: rutaCollection,
+    orden: "ascendente" | "descendente"
+  ): reto[] {
     if (orden === "ascendente") {
-      return this.coleccionRetos.sort((a, b) => this.getDistanciaTotalReto(coleccionRutas, a.getId()) - 
-      this.getDistanciaTotalReto(coleccionRutas, b.getId()));
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          this.getDistanciaTotalReto(coleccionRutas, a.getId()) -
+          this.getDistanciaTotalReto(coleccionRutas, b.getId())
+      );
     } else {
-      return this.coleccionRetos.sort((a, b) => this.getDistanciaTotalReto(coleccionRutas, b.getId()) - 
-      this.getDistanciaTotalReto(coleccionRutas, a.getId()));
+      return this.coleccionRetos.sort(
+        (a, b) =>
+          this.getDistanciaTotalReto(coleccionRutas, b.getId()) -
+          this.getDistanciaTotalReto(coleccionRutas, a.getId())
+      );
     }
-  } 
+  }
 }
 ```
 
@@ -1797,28 +1993,31 @@ A continuación se detallan los métodos de la clase uno a uno:
 Estos son tests para probar la funcionalidad de algunos métodos de la clase `retoCollection`:
 
 ```typescript
-import { reto } from '../../src/types/retos';
-import { retoCollection } from '../../src/collections/retoCollection';
-import 'mocha';
-import { expect } from 'chai'
+import { reto } from "../../src/types/retos";
+import { retoCollection } from "../../src/collections/retoCollection";
+import "mocha";
+import { expect } from "chai";
 
 const retoCollection1: retoCollection = new retoCollection([]);
 
-const reto1: reto = new reto('C3', 'El reto final', ['R2', 'R4'], 'Correr', ['USU1', 'USU3', 'USU4']);
+const reto1: reto = new reto("C3", "El reto final", ["R2", "R4"], "Correr", [
+  "USU1",
+  "USU3",
+  "USU4",
+]);
 
-
-describe('Comprobar clase RetoCollection', () => {
-    it('Metodos: getColeccionRetos(): reto []', () => {
-        expect(retoCollection1.getColeccionRetos().length).to.be.eql(2);
-    });
-    it('Metodos: addReto(reto: reto)', () => {
-        retoCollection1.addReto(reto1);
-        expect(retoCollection1.getColeccionRetos().length).to.be.eql(3);
-    });
-    it('Metodos: removeReto(id: string)', () => {
-        retoCollection1.removeReto('C3');
-        expect(retoCollection1.getColeccionRetos().length).to.be.eql(2);
-    });
+describe("Comprobar clase RetoCollection", () => {
+  it("Metodos: getColeccionRetos(): reto []", () => {
+    expect(retoCollection1.getColeccionRetos().length).to.be.eql(2);
+  });
+  it("Metodos: addReto(reto: reto)", () => {
+    retoCollection1.addReto(reto1);
+    expect(retoCollection1.getColeccionRetos().length).to.be.eql(3);
+  });
+  it("Metodos: removeReto(id: string)", () => {
+    retoCollection1.removeReto("C3");
+    expect(retoCollection1.getColeccionRetos().length).to.be.eql(2);
+  });
 });
 ```
 
@@ -1829,6 +2028,7 @@ En el segundo test, se agrega un objeto reto a retoCollection y se verifica que 
 En el tercer test, se elimina un objeto reto de retoCollection y se verifica que la longitud de la matriz de retos sea 2, lo que implica que se eliminó correctamente el reto.
 
 ### Schemas <a name="schemas"></a>
+
 > [Volver al índice](#índice)
 
 > A continuación se detallan los schema que se utilizarán en la aplicación. Estos schemas se utilizan para modelar y estructurar datos relacionados con usuarios, grupos, rutas y retos en una aplicación o sistema.
@@ -1912,6 +2112,7 @@ export type retoSchema = {
 Estos schemas son útiles porque permiten estructurar y organizar los datos de manera coherente y consistente en una base de datos o sistema de almacenamiento, lo que facilita la recuperación y manipulación de los datos en la aplicación o sistema. Además, permiten a los desarrolladores trabajar con una estructura de datos clara y coherente, lo que puede facilitar la creación de nuevas funcionalidades y características en la aplicación.
 
 ### Base de datos <a name="database"></a>
+
 > [Volver al índice](#índice)
 
 > A continuación se detallan los archivos de bases de datos que se utilizarán en la aplicación, cuya estructura esta definida por los schemas anteriores, y que se utilizarán para almacenar los datos de usuarios, grupos, rutas y retos.
@@ -2052,7 +2253,6 @@ Cada ruta tiene un identificador único (id), un nombre, unas coordenadas de ini
 
 Existen un total de 10 rutas en nuestra base de datos, si bien mediante las implementaciones que se han hecho en la práctica, se pueden añadir y eliminar elementos en la misma.
 
-
 ```typescript
 {
   "ruta": [
@@ -2125,6 +2325,7 @@ Existen un total de 3 retos en nuestra base de datos, si bien mediante las imple
 Todos estos archivos de base de datos componen el conjunto de toda la base de datos de nuestro programa, y se encuentran en la carpeta `database` del proyecto. Esta base de datos será sobre la que trabajaremos en a la hora de manipular los datos de nuestro programa.
 
 ### Programa principal <a name="principal"></a>
+
 > [Volver al índice](#índice)
 
 Nuestro prgrama principal consta de dos archivos principales que son `index.ts` y `gestor.ts`. El primero de ellos es el archivo que se ejecuta al iniciar el programa, y el segundo es el archivo que contiene la lógica principal del programa.
@@ -2144,9 +2345,9 @@ const gestion = new gestor();
 
 gestion.login();
 
-const grupoCollectionPrueba = new grupoCollection([])
-const rutaCollectionPrueba = new rutaCollection([])
-const retoCollectionPrueba = new retoCollection([])
+const grupoCollectionPrueba = new grupoCollection([]);
+const rutaCollectionPrueba = new rutaCollection([]);
+const retoCollectionPrueba = new retoCollection([]);
 ```
 
 Este programa importa varios módulos de colecciones de datos y un módulo gestor que se utilizan para administrar diferentes tipos de información. Los módulos de colecciones de datos son "usuarioCollection", "grupoCollection", "rutaCollection" y "retoCollection".
@@ -2157,7 +2358,7 @@ Luego, se crea una nueva instancia de "gestor" y se llama al método "login" en 
 
 El archivo `gestor.ts` es el archivo que contiene la lógica principal del programa. En él se importan las librerías necesarias para el funcionamiento del programa, se importan los archivos de colecciones.
 
- La clase "gestor" tiene una serie de métodos y propiedades que se utilizan para gestionar diferentes colecciones de datos y realizar diferentes acciones como iniciar sesión, registrar usuarios, mostrar menús de opciones, etc.
+La clase "gestor" tiene una serie de métodos y propiedades que se utilizan para gestionar diferentes colecciones de datos y realizar diferentes acciones como iniciar sesión, registrar usuarios, mostrar menús de opciones, etc.
 
 Para utilizar este archivo, se importan varias colecciones de datos y tipos de usuarios y grupos desde otros archivos. Además, se importa un módulo llamado "inquirer" que se utiliza para hacer preguntas al usuario en la terminal y obtener sus respuestas.
 
@@ -2223,7 +2424,6 @@ Entre los getters de la clase se encuentran los métodos siguientes:
 - El método "getColeccionRutas" devuelve la colección de rutas de la clase "gestor".
 - El método "getColeccionRetos" devuelve la colección de retos de la clase "gestor".
 
-
 Descritos los atributos y getters pasamos a explicar los métodos más complejos de la clase "gestor".
 
 #### Método `login`
@@ -2262,8 +2462,7 @@ El método `login` se utiliza para iniciar sesión en el sistema. Pide al usuari
 
 El método `registro` se utiliza para registrar a un nuevo usuario. Pide al usuario que introduzca su ID de usuario, su nombre y su actividad favorita. Comprueba si el ID de usuario ya existe en la colección de usuarios. Si no existe, crea un nuevo usuario y lo añade a la colección de usuarios. Si existe, pide al usuario que introduzca otro ID de usuario.
 
-
-```typescript	
+```typescript
   // Función para registrar un usuario. Preguntar al usuario los parámetros necesarios del constructor de usuario, comprobar que el id no exista en la lista de usuarios, en caso de que exista, se le pedirá que introduzca otro id.
   //Primero preguntar el id y comprobar si no existe, luego preguntar el resto de datos
   public registro() {
@@ -2329,7 +2528,7 @@ Las opciones disponibles son las siguientes:
 - "Retos": muestra un submenú que permite al usuario gestionar sus retos.
 - "Salir": finaliza el programa.
 
-```typescript	
+```typescript
   menuUsuario() {
     inquirer
       .prompt({
@@ -3262,7 +3461,7 @@ El método `menuCalificacionRutas` implementa un menú para ordenar la colecció
 
 Si el usuario elige "Ascendente" o "Descendente", la colección de rutas se ordena utilizando el método getRutasCalificacionMedia, que devuelve una lista de rutas ordenada según su calificación media. Luego, se recorre la lista resultante y se imprimen en pantalla el id de la ruta, su nombre y su calificación media.
 
-Si el usuario elige "Volver", se muestra el menú de ordenación de rutas. 
+Si el usuario elige "Volver", se muestra el menú de ordenación de rutas.
 
 ```typescript
  menuCalificacionRutas() {
@@ -3403,8 +3602,8 @@ En el cuerpo del método, se llama al método prompt de Inquirer y se pasa un ob
 
 El método prompt devuelve una promesa que se resuelve con la elección del usuario. Cuando se resuelve la promesa, se ejecuta una función de devolución de llamada (en este caso, un manejador de promesa) que utiliza una instrucción switch para determinar qué acción tomar en función de la elección del usuario.
 
-- Si el usuario elige "Ascendente", se llama al método getUsuariosAlfabetico de la colección de usuarios y se pasa true como argumento para ordenar los usuarios por nombre en orden ascendente. Luego, se utiliza un bucle forEach para imprimir cada usuario en la consola. 
-- Si el usuario elige "Descendente", se llama al método getUsuariosAlfabetico de la colección de usuarios y se pasa false como argumento para ordenar los usuarios por nombre en orden descendente. Luego, se utiliza un bucle forEach para imprimir cada usuario en la consola. 
+- Si el usuario elige "Ascendente", se llama al método getUsuariosAlfabetico de la colección de usuarios y se pasa true como argumento para ordenar los usuarios por nombre en orden ascendente. Luego, se utiliza un bucle forEach para imprimir cada usuario en la consola.
+- Si el usuario elige "Descendente", se llama al método getUsuariosAlfabetico de la colección de usuarios y se pasa false como argumento para ordenar los usuarios por nombre en orden descendente. Luego, se utiliza un bucle forEach para imprimir cada usuario en la consola.
 - Si el usuario elige "Volver", simplemente se llama al método menuOrdenacionUsuarios para volver al menú de ordenación de usuarios.
 
 ```typescript
@@ -3833,7 +4032,7 @@ El método `menuParticipantesGrupos` muestra un menú con tres opciones para ord
 
 En la primera parte, se usa inquirer.prompt() para crear el menú y se especifica que el usuario debe elegir una opción de una lista de tres opciones: "Más participantes", "Menos participantes" y "Volver". Cuando el usuario selecciona una opción, la función then() se ejecuta con la respuesta del usuario.
 
-En la siguiente parte, se utiliza una estructura de control switch para verificar la respuesta del usuario y ejecutar el código correspondiente. Si el usuario selecciona "Más participantes", se ordena la colección de grupos por número de participantes en orden ascendente utilizando el método ordenarGruposPorParticipantes() y se muestra cada grupo en la consola mediante el método forEach(). 
+En la siguiente parte, se utiliza una estructura de control switch para verificar la respuesta del usuario y ejecutar el código correspondiente. Si el usuario selecciona "Más participantes", se ordena la colección de grupos por número de participantes en orden ascendente utilizando el método ordenarGruposPorParticipantes() y se muestra cada grupo en la consola mediante el método forEach().
 
 Si el usuario selecciona "Menos participantes", se ordena la colección de grupos por número de participantes en orden descendente y se muestra cada grupo en la consola de manera similar a la opción anterior.
 
@@ -4054,7 +4253,6 @@ La función menuUnirseAlGrupo pide al usuario que introduzca el id de un grupo a
 
 #### Método `createUser`
 
-
 La función createUser crea un nuevo objeto usuario mediante el constructor de la clase usuario y lo añade a la colección de usuarios mediante el método addUsuario de la colección de usuarios. El constructor de la clase usuario espera cuatro argumentos.
 
 El constructor crea un objeto con las propiedades especificadas y devuelve una instancia de la clase usuario. La función createUser recibe los primeros tres argumentos y crea un nuevo objeto usuario con los mismos. Luego, añade el nuevo usuario a la colección de usuarios mediante el método addUsuario de la colección de usuarios.
@@ -4071,17 +4269,19 @@ El constructor crea un objeto con las propiedades especificadas y devuelve una i
 ```
 
 ### Conclusiones <a name="conclusiones"></a>
+
 > [Volver al índice](#índice)
 
 La práctica implica diseñar un modelo de datos orientado a objetos para un sistema de información que almacena registros de actividades deportivas. La práctica se realiza en equipo y se utiliza GitHub Classroom para alojar todo el código desarrollado. Además, se deben utilizar módulos como Inquirer.js y Lowdb, se requiere documentación mediante el uso de TypeDoc y se debe adoptar una metodología de desarrollo dirigido por pruebas/comportamiento.
 
 En cuanto a los requisitos del sistema, se especifican los datos que deben ser almacenados para las rutas, usuarios y grupos, así como las estadísticas de entrenamiento. Se deben respetar los principios SOLID de diseño orientado a objetos y se deben utilizar herramientas como Coveralls, Github Actions y Sonar Cloud para el control de calidad del código.
 
-En general, es un buen desafío de programación, ya que involucra una variedad de habilidades y herramientas importantes para el desarrollo de software. El diseño orientado a objetos es esencial en la programación moderna y la práctica es una buena oportunidad para aplicar los principios SOLID en un proyecto real. Además, el uso de herramientas como Inquirer.js y Lowdb puede proporcionar una experiencia práctica en la manipulación de datos y el uso de módulos externos en un proyecto. La inclusión de pruebas unitarias y la adopción de una metodología de desarrollo dirigido por pruebas/comportamiento es otro aspecto importante del desarrollo de software que puede ayudar a garantizar que el código sea robusto y cumpla con los requisitos. 
+En general, es un buen desafío de programación, ya que involucra una variedad de habilidades y herramientas importantes para el desarrollo de software. El diseño orientado a objetos es esencial en la programación moderna y la práctica es una buena oportunidad para aplicar los principios SOLID en un proyecto real. Además, el uso de herramientas como Inquirer.js y Lowdb puede proporcionar una experiencia práctica en la manipulación de datos y el uso de módulos externos en un proyecto. La inclusión de pruebas unitarias y la adopción de una metodología de desarrollo dirigido por pruebas/comportamiento es otro aspecto importante del desarrollo de software que puede ayudar a garantizar que el código sea robusto y cumpla con los requisitos.
 
 Concluimos que la realización de esta práctica es una experiencia valiosa para el desarrollo de habilidades y herramientas útiles para el desarrollo de software.
 
 ### Referencias <a name="referencias"></a>
+
 > [Volver al índice](#índice)
 
 1. [Entrada de texto](https://www.npmjs.com/package/prompt-sync)

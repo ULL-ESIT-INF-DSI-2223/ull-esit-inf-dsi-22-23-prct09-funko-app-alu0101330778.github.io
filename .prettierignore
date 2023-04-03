@@ -11,3 +11,6 @@ typedoc.json
 README.md
 enunciado.txt
 commands.txt
+coverage
+.github
+docs
