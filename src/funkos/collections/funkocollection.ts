@@ -60,7 +60,6 @@ export class funkoCollection {
   public addFunko(funko: funko): void | funkoSchema[] {
     const rawdata = fs.readFileSync(this.path);
     const funkoCollection: funkoSchema[] = JSON.parse(rawdata.toString());
-    //Declarar un objeto tipo funkoSchema
     if (!funkoCollection.find((funkoit) => funkoit.id === funko.getId())) {
       const funko1: funkoSchema = {
         id: funko.getId(),
@@ -176,7 +175,6 @@ export class funkoCollection {
       (funkoup) => funkoup.id === funko.getId()
     );
     if (funko1) {
-      //Cambiar los valores del funko1 y sustituirlo en la base de datos
       funko1.name = funko.getName();
       funko1.description = funko.getDescription();
       funko1.type = funko.getType();

@@ -5,7 +5,6 @@ import { funko } from '../../../src/funkos/types/funko.js';
 import { funkoSchema } from '../../../src/funkos/schema/funkoSchema.js';
 import { genre } from '../../../src/funkos/types/genre.js';
 import { type } from '../../../src/funkos/types/type.js';
-//{"id":"5","name":"Funko5","description":"Funko5 description","type":"POP","genre":"MUSIC","franchise":"Funko5 franchise","number":5,"exclusive":true,"specialFeatures":"Funko5 special features","marketValue":75},{"id":"6","name":"Funko6","description":"Funko6 description","type":"POP","genre":"MUSIC","franchise":"Funko6 franchise","number":6,"exclusive":true,"specialFeatures":"Funko6 special features","marketValue":110},{"id":"20","name":"Funko20","description":"The best Sonic Funko ever","type":"Pop!","genre":"Games","franchise":"Sonic","number":1,"exclusive":false,"specialFeatures":"None","marketValue":100}
 const funkoCollectiontest = new funkoCollection("Test");
 const funko1: funkoSchema = {
     id: 5,
@@ -97,12 +96,6 @@ describe('Testeo de la Clase funkoCollection', () => {
     expect(result).to.deep.equal(listafunkos3);
     funkoCollectiontest.updateFunko(funko3Normal);
   });
-
-
-  
-
-  
-  
 });
 
 
